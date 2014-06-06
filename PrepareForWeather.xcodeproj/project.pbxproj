@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9948166C1941FD4500A7F895 /* CityManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948166B1941FD4500A7F895 /* CityManageView.m */; };
 		99D665E01941B05C00FE3B83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665DF1941B05C00FE3B83 /* Foundation.framework */; };
 		99D665E21941B05C00FE3B83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E11941B05C00FE3B83 /* CoreGraphics.framework */; };
 		99D665E41941B05C00FE3B83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E31941B05C00FE3B83 /* UIKit.framework */; };
@@ -23,6 +24,11 @@
 		99D666141941B1EF00FE3B83 /* ChangeCitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666131941B1EF00FE3B83 /* ChangeCitiesViewController.m */; };
 		99D666171941B4AD00FE3B83 /* CityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666161941B4AD00FE3B83 /* CityManager.m */; };
 		99D6661A1941B51000FE3B83 /* ChangeCitiesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666191941B51000FE3B83 /* ChangeCitiesView.m */; };
+		99D6661E1941C03800FE3B83 /* WeatherRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D6661D1941C03800FE3B83 /* WeatherRootViewController.m */; };
+		99D666241941C08700FE3B83 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666231941C08700FE3B83 /* SettingView.m */; };
+		99D666271941C09600FE3B83 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666261941C09600FE3B83 /* MainView.m */; };
+		99D6662A1941C11800FE3B83 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D666291941C11800FE3B83 /* MapView.m */; };
+		99D6662E1941CDC100FE3B83 /* WeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D6662D1941CDC100FE3B83 /* WeatherView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9948166A1941FD4500A7F895 /* CityManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityManageView.h; sourceTree = "<group>"; };
+		9948166B1941FD4500A7F895 /* CityManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityManageView.m; sourceTree = "<group>"; };
 		99D665DC1941B05C00FE3B83 /* PrepareForWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrepareForWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D665DF1941B05C00FE3B83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		99D665E11941B05C00FE3B83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +68,16 @@
 		99D666161941B4AD00FE3B83 /* CityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityManager.m; sourceTree = "<group>"; };
 		99D666181941B51000FE3B83 /* ChangeCitiesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeCitiesView.h; sourceTree = "<group>"; };
 		99D666191941B51000FE3B83 /* ChangeCitiesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeCitiesView.m; sourceTree = "<group>"; };
+		99D6661C1941C03800FE3B83 /* WeatherRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherRootViewController.h; sourceTree = "<group>"; };
+		99D6661D1941C03800FE3B83 /* WeatherRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherRootViewController.m; sourceTree = "<group>"; };
+		99D666221941C08700FE3B83 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
+		99D666231941C08700FE3B83 /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		99D666251941C09600FE3B83 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		99D666261941C09600FE3B83 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
+		99D666281941C11800FE3B83 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		99D666291941C11800FE3B83 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		99D6662C1941CDC100FE3B83 /* WeatherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherView.h; sourceTree = "<group>"; };
+		99D6662D1941CDC100FE3B83 /* WeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +141,7 @@
 				99D665EF1941B05C00FE3B83 /* AppDelegate.m */,
 				99D6660E1941B0DC00FE3B83 /* RootViewController.h */,
 				99D6660F1941B0DC00FE3B83 /* RootViewController.m */,
+				99D6661B1941BBEC00FE3B83 /* 界面组织 */,
 				99D666111941B1C500FE3B83 /* 切换城市 */,
 				99D665F11941B05D00FE3B83 /* Images.xcassets */,
 				99D665E61941B05C00FE3B83 /* Supporting Files */,
@@ -170,6 +189,33 @@
 				99D666161941B4AD00FE3B83 /* CityManager.m */,
 			);
 			name = "切换城市";
+			sourceTree = "<group>";
+		};
+		99D6661B1941BBEC00FE3B83 /* 界面组织 */ = {
+			isa = PBXGroup;
+			children = (
+				99D6661C1941C03800FE3B83 /* WeatherRootViewController.h */,
+				99D6661D1941C03800FE3B83 /* WeatherRootViewController.m */,
+				99D666251941C09600FE3B83 /* MainView.h */,
+				99D666261941C09600FE3B83 /* MainView.m */,
+				99D6662B1941C12100FE3B83 /* MainViewSub */,
+				99D666281941C11800FE3B83 /* MapView.h */,
+				99D666291941C11800FE3B83 /* MapView.m */,
+			);
+			name = "界面组织";
+			sourceTree = "<group>";
+		};
+		99D6662B1941C12100FE3B83 /* MainViewSub */ = {
+			isa = PBXGroup;
+			children = (
+				99D6662C1941CDC100FE3B83 /* WeatherView.h */,
+				99D6662D1941CDC100FE3B83 /* WeatherView.m */,
+				99D666221941C08700FE3B83 /* SettingView.h */,
+				99D666231941C08700FE3B83 /* SettingView.m */,
+				9948166A1941FD4500A7F895 /* CityManageView.h */,
+				9948166B1941FD4500A7F895 /* CityManageView.m */,
+			);
+			name = MainViewSub;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,12 +313,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9948166C1941FD4500A7F895 /* CityManageView.m in Sources */,
 				99D665F01941B05C00FE3B83 /* AppDelegate.m in Sources */,
 				99D666141941B1EF00FE3B83 /* ChangeCitiesViewController.m in Sources */,
 				99D665EC1941B05C00FE3B83 /* main.m in Sources */,
 				99D6661A1941B51000FE3B83 /* ChangeCitiesView.m in Sources */,
+				99D666241941C08700FE3B83 /* SettingView.m in Sources */,
+				99D666271941C09600FE3B83 /* MainView.m in Sources */,
+				99D6662E1941CDC100FE3B83 /* WeatherView.m in Sources */,
+				99D6661E1941C03800FE3B83 /* WeatherRootViewController.m in Sources */,
 				99D666101941B0DC00FE3B83 /* RootViewController.m in Sources */,
 				99D666171941B4AD00FE3B83 /* CityManager.m in Sources */,
+				99D6662A1941C11800FE3B83 /* MapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

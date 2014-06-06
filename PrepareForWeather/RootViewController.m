@@ -21,9 +21,8 @@
     if (self) {
         // Custom initialization
         _datas  = @[
+                    @[@"界面组织", @"WeatherRootViewController"],
                     @[@"切换城市", @"ChangeCitiesViewController"],
-                    
-                    
                     ];
     }
     return self;

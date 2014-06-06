@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A4647EEA-4B38-4C87-BE74-B4EAB767F727</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PrepareForWeather</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C1569FF7-7379-4E64-B1E2-7E8BC2528755</key>
+		<string>https://github.com/iamim2/PrepareForWeather.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PrepareForWeather.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C1569FF7-7379-4E64-B1E2-7E8BC2528755</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/iamim2/PrepareForWeather.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C1569FF7-7379-4E64-B1E2-7E8BC2528755</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C1569FF7-7379-4E64-B1E2-7E8BC2528755</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PrepareForWeather</string>
+		</dict>
+	</array>
+</dict>
+</plist>

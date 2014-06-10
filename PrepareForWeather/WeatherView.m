@@ -7,11 +7,14 @@
 //
 
 #import "WeatherView.h"
+#import "WeatherContentView.h"
 
 @interface WeatherView()
 @property (nonatomic) UIButton *cityManageButton;
 @property (nonatomic) UIButton *mapButton;
 @property (nonatomic) UIButton *settingButton;
+@property (nonatomic) UIScrollView  *scorllView;
+@property (nonatomic) NSMutableArray *items;
 @end
 
 @implementation WeatherView
@@ -41,7 +44,31 @@
         _settingButton.backgroundColor = [UIColor redColor];
         [_settingButton addTarget:self action:@selector(onTapSettingButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_settingButton];
-
+        
+        // temp //TODO:!
+        _scorllView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        _scorllView.pagingEnabled = YES;
+        [self addSubview:_scorllView];
+        int count = 3;
+        WeatherContentView *contentView = nil;
+        float itemWidth = CGRectGetWidth(self.bounds);
+        float itemHeight = CGRectGetHeight(self.bounds);
+        __weak typeof(self) weakSelf = self;
+        _items = [NSMutableArray array];
+        for (int i = 0; i < count; i++) {
+            contentView = [[WeatherContentView alloc] initWithFrame:CGRectMake(itemWidth * i, 0, itemWidth, itemHeight)];
+            [_scorllView addSubview:contentView];
+            [_items addObject:contentView];
+            contentView.didChangeSelectedIndexHandler = ^(NSInteger selectedIndex, WeatherContentView *srcItem){
+                WeatherContentView *item = nil;
+                for (item in weakSelf.items) {
+                    if (item != srcItem) {
+                        [item changeSelectedIndex:selectedIndex];
+                    }
+                }
+            };
+        }
+        _scorllView.contentSize = CGSizeMake(itemWidth * count, itemHeight);
     }
     return self;
 }

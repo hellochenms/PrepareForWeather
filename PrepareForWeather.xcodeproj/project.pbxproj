@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		993534271946B5B9009F7784 /* WeatherBasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993534261946B5B9009F7784 /* WeatherBasicView.m */; };
+		9935342A1946B5C8009F7784 /* WeatherExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993534291946B5C8009F7784 /* WeatherExtraView.m */; };
 		9948166C1941FD4500A7F895 /* CityManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948166B1941FD4500A7F895 /* CityManageView.m */; };
+		99592FFB1946B3F000B39EB3 /* WeatherContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99592FFA1946B3F000B39EB3 /* WeatherContentView.m */; };
 		99D665E01941B05C00FE3B83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665DF1941B05C00FE3B83 /* Foundation.framework */; };
 		99D665E21941B05C00FE3B83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E11941B05C00FE3B83 /* CoreGraphics.framework */; };
 		99D665E41941B05C00FE3B83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E31941B05C00FE3B83 /* UIKit.framework */; };
@@ -42,8 +45,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		993534251946B5B9009F7784 /* WeatherBasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherBasicView.h; sourceTree = "<group>"; };
+		993534261946B5B9009F7784 /* WeatherBasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherBasicView.m; sourceTree = "<group>"; };
+		993534281946B5C8009F7784 /* WeatherExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherExtraView.h; sourceTree = "<group>"; };
+		993534291946B5C8009F7784 /* WeatherExtraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherExtraView.m; sourceTree = "<group>"; };
 		9948166A1941FD4500A7F895 /* CityManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityManageView.h; sourceTree = "<group>"; };
 		9948166B1941FD4500A7F895 /* CityManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityManageView.m; sourceTree = "<group>"; };
+		99592FF91946B3F000B39EB3 /* WeatherContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherContentView.h; sourceTree = "<group>"; };
+		99592FFA1946B3F000B39EB3 /* WeatherContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherContentView.m; sourceTree = "<group>"; };
 		99D665DC1941B05C00FE3B83 /* PrepareForWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrepareForWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D665DF1941B05C00FE3B83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		99D665E11941B05C00FE3B83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -104,6 +113,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		993534241946B58C009F7784 /* WeatherContentViewSub */ = {
+			isa = PBXGroup;
+			children = (
+				993534251946B5B9009F7784 /* WeatherBasicView.h */,
+				993534261946B5B9009F7784 /* WeatherBasicView.m */,
+				993534281946B5C8009F7784 /* WeatherExtraView.h */,
+				993534291946B5C8009F7784 /* WeatherExtraView.m */,
+			);
+			name = WeatherContentViewSub;
+			sourceTree = "<group>";
+		};
+		99592FF81946B3BF00B39EB3 /* WeatherViewSub */ = {
+			isa = PBXGroup;
+			children = (
+				99592FF91946B3F000B39EB3 /* WeatherContentView.h */,
+				99592FFA1946B3F000B39EB3 /* WeatherContentView.m */,
+				993534241946B58C009F7784 /* WeatherContentViewSub */,
+			);
+			name = WeatherViewSub;
+			sourceTree = "<group>";
+		};
 		99D665D31941B05C00FE3B83 = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +240,7 @@
 			children = (
 				99D6662C1941CDC100FE3B83 /* WeatherView.h */,
 				99D6662D1941CDC100FE3B83 /* WeatherView.m */,
+				99592FF81946B3BF00B39EB3 /* WeatherViewSub */,
 				99D666221941C08700FE3B83 /* SettingView.h */,
 				99D666231941C08700FE3B83 /* SettingView.m */,
 				9948166A1941FD4500A7F895 /* CityManageView.h */,
@@ -313,9 +344,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9935342A1946B5C8009F7784 /* WeatherExtraView.m in Sources */,
+				993534271946B5B9009F7784 /* WeatherBasicView.m in Sources */,
 				9948166C1941FD4500A7F895 /* CityManageView.m in Sources */,
 				99D665F01941B05C00FE3B83 /* AppDelegate.m in Sources */,
 				99D666141941B1EF00FE3B83 /* ChangeCitiesViewController.m in Sources */,
+				99592FFB1946B3F000B39EB3 /* WeatherContentView.m in Sources */,
 				99D665EC1941B05C00FE3B83 /* main.m in Sources */,
 				99D6661A1941B51000FE3B83 /* ChangeCitiesView.m in Sources */,
 				99D666241941C08700FE3B83 /* SettingView.m in Sources */,

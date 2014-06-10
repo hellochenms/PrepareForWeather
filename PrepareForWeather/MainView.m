@@ -52,6 +52,7 @@
         [self addSubview:_settingView];
         
         _coverView = [[UIControl alloc] initWithFrame:_weatherView.bounds];
+        _coverView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
         [_coverView addTarget:self action:@selector(hiddSettingView) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
@@ -93,6 +94,7 @@
                          CGRect settingFrame = _settingView.frame;
                          settingFrame.origin.x = CGRectGetWidth(self.bounds) - MV_OffsetX;
                          _settingView.frame = settingFrame;
+                         _coverView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
                      }
                      completion:^(BOOL finished) {
                          self.userInteractionEnabled = YES;
@@ -108,6 +110,7 @@
                          CGRect settingFrame = _settingView.frame;
                          settingFrame.origin.x = CGRectGetWidth(self.bounds);
                          _settingView.frame = settingFrame;
+                         _coverView.backgroundColor = [UIColor clearColor];
                      }
                      completion:^(BOOL finished) {
                          self.userInteractionEnabled = YES;

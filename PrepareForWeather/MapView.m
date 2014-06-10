@@ -22,7 +22,7 @@
         self.backgroundColor = [UIColor blueColor];
         
         _backToMainViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backToMainViewButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 10 - 60, 100, 60, 60);
+        _backToMainViewButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 10 - 60, 0, 60, 60);
         _backToMainViewButton.backgroundColor = [UIColor redColor];
         [_backToMainViewButton addTarget:self action:@selector(onBackToMainButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_backToMainViewButton];

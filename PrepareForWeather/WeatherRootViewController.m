@@ -30,6 +30,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    self.navigationController.navigationBarHidden = YES;
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    if (isIOS7) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     CGRect frame = [UIScreen mainScreen].bounds;
     _mainView = [[MainView alloc] initWithFrame:frame];

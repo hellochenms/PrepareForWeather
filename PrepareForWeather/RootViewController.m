@@ -32,6 +32,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    self.navigationController.navigationBarHidden = YES;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    if (isIOS7) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     _tableView.backgroundColor = [UIColor lightGrayColor];
     _tableView.dataSource = self;

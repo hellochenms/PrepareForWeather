@@ -1,28 +1,24 @@
 //
-//  ChangeCitiesViewController.m
+//  CitySelectViewController.m
 //  PrepareForWeather
 //
-//  Created by Chen Meisong on 14-6-6.
+//  Created by Chen Meisong on 14-6-10.
 //  Copyright (c) 2014年 Chen Meisong. All rights reserved.
 //
 
-#import "ChangeCitiesViewController.h"
-#import "ChangeCitiesView.h"
+#import "SelectCityViewController.h"
 
-@interface ChangeCitiesViewController ()
-@property (nonatomic) ChangeCitiesView *mainView;
+@interface SelectCityViewController ()
+
 @end
 
-@implementation ChangeCitiesViewController
+@implementation SelectCityViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        if (isIOS7) {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-        }
     }
     return self;
 }
@@ -31,10 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = randomColor;//TODO:!
-    
-    _mainView = [[ChangeCitiesView alloc] initWithFrame:CGRectMake(10, 10, 300, 400)];
-    [self.view addSubview:_mainView];
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 - (void)didReceiveMemoryWarning

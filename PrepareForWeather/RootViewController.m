@@ -23,6 +23,8 @@
         _datas  = @[
                     @[@"界面组织", @"WeatherRootViewController"],
                     @[@"切换城市", @"ChangeCitiesViewController"],
+                    @[@"管理城市", @"ManageCityViewController"],
+                    @[@"管理城市GM版", @"ManageCityGMViewController"],
                     ];
     }
     return self;
@@ -33,9 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.navigationController.navigationBarHidden = YES;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     if (isIOS7) {
         self.automaticallyAdjustsScrollViewInsets = NO;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero];

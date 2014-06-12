@@ -9,7 +9,7 @@
 #import "SelectCityViewController.h"
 
 @interface SelectCityViewController ()
-
+@property (nonatomic) UIButton *finishButton;
 @end
 
 @implementation SelectCityViewController
@@ -28,6 +28,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor lightGrayColor];
+    if (isIOS7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+    
+    _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _finishButton.frame = CGRectMake(60, 10, 200, 50);
+    _finishButton.backgroundColor = [UIColor blueColor];
+    [_finishButton setTitle:@"完成添加城市" forState:UIControlStateNormal];
+    [_finishButton addTarget:self action:@selector(onTapFinish) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_finishButton];
+}
+
+- (void)onTapFinish{
+    if (_tapFinishHandler) {
+        _tapFinishHandler();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

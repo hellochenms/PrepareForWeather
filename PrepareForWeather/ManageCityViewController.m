@@ -22,11 +22,12 @@
 @property (nonatomic) UILongPressGestureRecognizer  *longPressRec;
 @property (nonatomic) UIPanGestureRecognizer        *panRec;
 @property (nonatomic) UITapGestureRecognizer        *tapRec;
-@property (nonatomic) UIButton          *editButton;
-@property (nonatomic) CityItem          *touchedItem;
-@property (nonatomic) CGPoint           beginPoint;
-@property (nonatomic) CGPoint           itemBeginCenter;
-@property (nonatomic) CGPoint           itemToCenter;
+@property (nonatomic) UIButton                      *editButton;
+
+@property (nonatomic) CityItem                      *touchedItem;
+@property (nonatomic) CGPoint                       srcTouchPoint;
+@property (nonatomic) CGPoint                       srcTouchItemCenter;
+@property (nonatomic) CGPoint                       destTouchItemCenter;
 @end
 
 @implementation ManageCityViewController
@@ -56,6 +57,7 @@
     }
     
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 300, 300)];
+    _containerView.clipsToBounds = YES;
     _containerView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_containerView];
     [self refreshUI];
@@ -90,8 +92,8 @@
                                                          (itemHeight + distance) * (i / MCVCItemCountInRow),
                                                          itemWidth,
                                                          itemHeight)];
+        item.tapDeleteHandler = [self buildTapDeleteHandler];
         [item reloadData:[_datas objectAtIndex:i]];
-        item.backgroundColor = [UIColor blueColor];
         [_containerView addSubview:item];
         [_items addObject:item];
     }
@@ -124,9 +126,7 @@
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:{
-//            NSLog(@"itemCenter: %@ -> %@  @@%s", NSStringFromCGPoint(_itemBeginCenter), NSStringFromCGPoint(_touchedItem.center), __func__);
             [self endMove:rec];
-            _panRec.enabled = YES;
             break;
         }
         default:
@@ -148,7 +148,6 @@
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:{
-//            NSLog(@"itemCenter: %@ -> %@  @@%s", NSStringFromCGPoint(_itemBeginCenter), NSStringFromCGPoint(_touchedItem.center), __func__);
             [self endMove:rec];
             break;
         }
@@ -159,9 +158,9 @@
 
 - (void)beginMove:(UIGestureRecognizer *)rec{
     _touchedItem = nil;
-    _beginPoint = CGPointZero;
-    _itemBeginCenter = CGPointZero;
-    _itemToCenter = CGPointZero;
+    _srcTouchPoint = CGPointZero;
+    _srcTouchItemCenter = CGPointZero;
+    _destTouchItemCenter = CGPointZero;
     
     CGPoint point = [rec locationInView:rec.view];
     CityItem *item = nil;
@@ -170,9 +169,9 @@
         if ([item isKindOfClass:[CityItem class]] && CGRectContainsPoint(item.frame, point)) {
             isTouchOnItem = YES;
             _touchedItem = item;
-            _beginPoint = point;
-            _itemBeginCenter = item.center;
-            _itemToCenter = _itemBeginCenter;
+            _srcTouchPoint = point;
+            _srcTouchItemCenter = item.center;
+            _destTouchItemCenter = item.center;
             break;
         }
     }
@@ -181,26 +180,62 @@
     }
 }
 - (void)keepMove:(UIGestureRecognizer *)rec{
-    CGPoint point = [rec locationInView:rec.view];
-    float offsetX = point.x - _beginPoint.x;
-    float offsetY = point.y - _beginPoint.y;
-    CGPoint center = CGPointMake(_itemBeginCenter.x + offsetX, _itemBeginCenter.y + offsetY);
-    _touchedItem.transform = CGAffineTransformMakeTranslation(offsetX, offsetY);
+    if (!_touchedItem) {
+        return;
+    }
+    CGPoint curTouchPoint = [rec locationInView:rec.view];
+    float offsetX = curTouchPoint.x - _srcTouchPoint.x;
+    float offsetY = curTouchPoint.y - _srcTouchPoint.y;
+    CGPoint curCenter = CGPointMake(_srcTouchItemCenter.x + offsetX, _srcTouchItemCenter.y + offsetY);
+    _touchedItem.center = curCenter;
     
     CityItem *item = nil;
+    int curTouchIndex = -1;
+    int targetIndex = -1;
     for (item in _items) {
-        if ([item isKindOfClass:[CityItem class]] && item != _touchedItem && CGRectContainsPoint(item.frame, center)) {
-            CGPoint nextCenter = item.center;
-            item.center = _itemToCenter;
-            _itemToCenter = nextCenter;
+        if ([item isKindOfClass:[CityItem class]] && item != _touchedItem && CGRectContainsPoint(item.frame, curCenter)) {
+            curTouchIndex = [_items indexOfObject:_touchedItem];
+            targetIndex = [_items indexOfObject:item];
             break;
         }
     }
+    
+    if (curTouchIndex == -1 || targetIndex == -1) {
+        return;
+    }
+    NSLog(@"_datas(%@)  @@%s", _datas, __func__);
+    
+    CGPoint nextDestTouchItemCenter =  ((CityItem *)[_items objectAtIndex:targetIndex]).center;
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         if (curTouchIndex > targetIndex) {
+                             for (int i = targetIndex; i <= curTouchIndex - 2; i++) {
+                                 ((CityItem *)[_items objectAtIndex:i]).center = ((CityItem *)[_items objectAtIndex:i + 1]).center;
+                             }
+                             ((CityItem *)[_items objectAtIndex:curTouchIndex - 1]).center = _destTouchItemCenter;
+                         }else{
+                             for (int i = targetIndex; i >= curTouchIndex + 2; i--) {
+                                 ((CityItem *)[_items objectAtIndex:i]).center = ((CityItem *)[_items objectAtIndex:i - 1]).center;
+                             }
+                             NSLog(@"curTouchIndex(%d)  @@%s", curTouchIndex, __func__);
+                             ((CityItem *)[_items objectAtIndex:curTouchIndex + 1]).center = _destTouchItemCenter;
+                         }
+                         [_items removeObject:_touchedItem];
+                         [_items insertObject:_touchedItem atIndex:targetIndex];
+                         NSString *curTouchData = [_datas objectAtIndex:curTouchIndex];
+                         _destTouchItemCenter = nextDestTouchItemCenter;
+                         [_datas removeObject:curTouchData];
+                         [_datas insertObject:curTouchData atIndex:targetIndex];
+//                         NSLog(@"_datas(%@)  @@%s", _datas, __func__);
+    }];
 }
 
 - (void)endMove:(UIGestureRecognizer *)rec{
-    _touchedItem.center = _itemToCenter;
-    _touchedItem.transform = CGAffineTransformIdentity;
+    if (!_touchedItem) {
+        return;
+    }
+    _touchedItem.center = _destTouchItemCenter;
 }
 
 - (void)onTap:(UITapGestureRecognizer *)tapRec{
@@ -226,6 +261,9 @@
 }
 
 - (void)changeEditing:(BOOL)isEditing{
+    if (_isEditing == isEditing) {
+        return;
+    }
     _isEditing = isEditing;
     CityItem *item = nil;
     for (item in _items) {
@@ -235,31 +273,71 @@
             item.hidden = isEditing;
         }
     }
-    if (!_isEditing) {
-        _panRec.enabled = NO;
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    _panRec.enabled = _isEditing;
 }
 
 - (void)onTapAddCityItem{
     SelectCityViewController *subViewController = [SelectCityViewController new];
+    __weak typeof(self) weakSelf = self;
+    subViewController.tapFinishHandler = ^{
+        [weakSelf.datas addObject:[NSString stringWithFormat:@"new%.0f", [[NSDate date] timeIntervalSince1970]]];
+        int i = [weakSelf.datas count] - 1;
+        float itemWidth = 90;
+        float itemHeight = 90;
+        float distance = 15;
+        CityItem *item = [[CityItem alloc] initWithFrame:CGRectMake((itemWidth + distance) * (i % MCVCItemCountInRow),
+                                                          (itemHeight + distance) * (i / MCVCItemCountInRow),
+                                                          itemWidth,
+                                                          itemHeight)];
+        item.tapDeleteHandler = [self buildTapDeleteHandler];
+        [item reloadData:[weakSelf.datas lastObject]];
+        [weakSelf.containerView addSubview:item];
+        UIButton *addButton = [weakSelf.items lastObject];
+        if (i == MCVCItemMaxCount - 1) {
+            [addButton removeFromSuperview];
+            [weakSelf.items removeObject:addButton];
+            [weakSelf.items addObject:item];
+        }else{
+            addButton.frame = CGRectMake((itemWidth + distance) * ((i + 1) % MCVCItemCountInRow),
+                                         (itemHeight + distance) * ((i + 1) / MCVCItemCountInRow),
+                                         itemWidth,
+                                         itemHeight);
+            [weakSelf.items insertObject:item atIndex:i];
+        }
+    };
     [self.navigationController pushViewController:subViewController animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (TapDeleteHandler)buildTapDeleteHandler{
+    __weak typeof(self) weakSelf = self;
+    TapDeleteHandler tapDeleteHandler = ^(CityItem * deleteItem){
+        int deleteItemIndex = [weakSelf.items indexOfObject:deleteItem];
+        for (int i = [weakSelf.items count] - 1; i > deleteItemIndex; i--) {
+            ((CityItem *)[weakSelf.items objectAtIndex:i]).center = ((CityItem *)[weakSelf.items objectAtIndex:i - 1]).center;
+        }
+        [deleteItem removeFromSuperview];
+        [weakSelf.items removeObject:deleteItem];
+        [weakSelf.datas removeObjectAtIndex:deleteItemIndex];
+        NSLog(@"weakSelf.datas(%@)  @@%s", weakSelf.datas, __func__);
+        
+        if ([weakSelf.datas count] == MCVCItemMaxCount - 1) {
+            float itemWidth = 90;
+            float itemHeight = 90;
+            float distance = 15;
+            UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            addButton.frame = CGRectMake((itemWidth + distance) * ((MCVCItemMaxCount - 1) % MCVCItemCountInRow),
+                                         (itemHeight + distance) * ((MCVCItemMaxCount - 1) / MCVCItemCountInRow),
+                                         itemWidth,
+                                         itemHeight);
+            [addButton setTitle:@"Add" forState:UIControlStateNormal];
+            [addButton addTarget:self action:@selector(onTapAddCityItem) forControlEvents:UIControlEventTouchUpInside];
+            addButton.hidden = _isEditing;
+            [_items addObject:addButton];
+            [_containerView addSubview:addButton];
+        }
+    };
+    
+    return tapDeleteHandler;
 }
-*/
 
 @end

@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CityItem;
+
+typedef void (^TapDeleteHandler)(CityItem*);
 
 @interface CityItem : UIView
+@property (nonatomic, copy) TapDeleteHandler tapDeleteHandler;
 - (void)reloadData:(NSString *)data;
 - (void)showDeleteButton:(BOOL)toShow;
 @end

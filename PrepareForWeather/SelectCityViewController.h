@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SelectCityViewController : UIViewController
+typedef void (^TapHandler) (void);
 
+@interface SelectCityViewController : UIViewController
+@property (nonatomic, copy) TapHandler tapFinishHandler;
 @end

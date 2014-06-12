@@ -24,7 +24,6 @@
                     @[@"界面组织", @"WeatherRootViewController"],
                     @[@"切换城市", @"ChangeCitiesViewController"],
                     @[@"管理城市", @"ManageCityViewController"],
-                    @[@"管理城市GM版", @"ManageCityGMViewController"],
                     ];
     }
     return self;

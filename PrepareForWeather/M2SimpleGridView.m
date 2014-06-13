@@ -280,15 +280,35 @@
     M2SimpleGridViewCell *item = nil;
     int curTouchIndex = -1;
     int targetIndex = -1;
+    BOOL isAtValidArea = NO;
     for (item in _items) {
-        if ([item isKindOfClass:[M2SimpleGridViewCell class]] && item != _touchedItem && CGRectContainsPoint(item.frame, curCenter)) {
+        if (![item isKindOfClass:[M2SimpleGridViewCell class]]) {
+            continue;
+        }
+        if (item != _touchedItem && CGRectContainsPoint(item.frame, curCenter)) {
+            isAtValidArea = YES;
             curTouchIndex = [_items indexOfObject:_touchedItem];
             targetIndex = [_items indexOfObject:item];
             break;
         }
     }
+    if (!isAtValidArea) {
+        NSLog(@"进入非法区  @@%s", __func__);
+        if ([_dataSource numberOfCellsInGridView:self] == _maxItemCount) {
+            return;
+        }
+        CGRect frame = CGRectZero;
+        for (NSInteger i = [_items count] - 1; i < _maxItemCount; i++) {
+            frame = [self buildItemFrameWithIndex:i];
+            if (CGRectContainsPoint(frame, curCenter)) {
+                curTouchIndex = [_items indexOfObject:_touchedItem];
+                targetIndex = [_items count] - 2;
+                break;
+            }
+        }
+    }
     
-    if (curTouchIndex == -1 || targetIndex == -1) {
+    if (curTouchIndex == -1 || targetIndex == -1 || curTouchIndex == targetIndex) {
         return;
     }
     
@@ -345,6 +365,7 @@
 - (UIView *)buildAddItemView{
     UIView *addItemView = [self.dataSource addItemViewForGridView:self];
     NSAssert(addItemView != nil, @"您需要实现M2SimpleGridViewDataSource协议的addItemViewForGridView:方法，且返回值不能为nil。");
+    NSAssert(![addItemView isKindOfClass:[M2SimpleGridViewCell class]], @"M2SimpleGridViewDataSource协议的addItemViewForGridView:方法返回值不能是M2SimpleGridViewCell。");
     addItemView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAddItemRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapAddItem)];
     [addItemView addGestureRecognizer:tapAddItemRec];

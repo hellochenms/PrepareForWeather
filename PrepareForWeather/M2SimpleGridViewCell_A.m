@@ -2,18 +2,18 @@
 //  M2SimpleGridViewCell.m
 //  PrepareForWeather
 //
-//  Created by Chen Meisong on 14-6-13.
+//  Created by Chen Meisong on 14-6-12.
 //  Copyright (c) 2014年 Chen Meisong. All rights reserved.
 //
 
-#import "M2SimpleGridViewCell.h"
+#import "M2SimpleGridViewCell_A.h"
 
-@interface M2SimpleGridViewCell()
+@interface M2SimpleGridViewCell_A()
 @property (nonatomic) UIView    *contentView;
 @property (nonatomic) UIButton  *deleteButton;
 @end
 
-@implementation M2SimpleGridViewCell
+@implementation M2SimpleGridViewCell_A
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,7 +34,7 @@
     return self;
 }
 
-#pragma mark -
+#pragma mark - 
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     
@@ -69,5 +69,6 @@
         _tapDeleteHandler(self);
     }
 }
+
 
 @end

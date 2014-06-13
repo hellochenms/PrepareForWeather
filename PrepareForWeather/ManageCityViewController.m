@@ -242,18 +242,18 @@
     if (!_isEditing) {
         return;//TODO:!
     }
-    CGPoint point = [tapRec locationInView:tapRec.view];
-    CityItem *item = nil;
-    BOOL isTouchOnItem = NO;
-    for (item in _items) {
-        if ([item isKindOfClass:[CityItem class]] && CGRectContainsPoint(item.frame, point)) {
-            isTouchOnItem = YES;
-            break;
-        }
-    }
-    if (!isTouchOnItem) {
+//    CGPoint point = [tapRec locationInView:tapRec.view];
+//    CityItem *item = nil;
+//    BOOL isTouchOnItem = NO;
+//    for (item in _items) {
+//        if ([item isKindOfClass:[CityItem class]] && CGRectContainsPoint(item.frame, point)) {
+//            isTouchOnItem = YES;
+//            break;
+//        }
+//    }
+//    if (!isTouchOnItem) {
         [self changeEditing:NO];
-    }
+//    }
 }
 
 - (void)onTapEdit{

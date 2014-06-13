@@ -6,8 +6,6 @@
 //  Copyright (c) 2014年 Chen Meisong. All rights reserved.
 //
 
-#import "M2SimpleGridViewCell.h"
-
-@interface CityItemCell : M2SimpleGridViewCell
+@interface CityItemCell : UIView
 - (void)reloadData:(NSString *)data;
 @end

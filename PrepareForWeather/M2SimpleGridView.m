@@ -7,12 +7,14 @@
 //
 
 #import "M2SimpleGridView.h"
-#import "M2SimpleGridViewCell.h"
+
+#define M2SGV_Tag_TypeContentItem   6000
+#define M2SGV_Tag_TypeAddItem       6001
 
 @interface M2SimpleGridView()
 @property (nonatomic) NSMutableArray                *items;
-@property (nonatomic) NSInteger                     itemCountInRow;
 @property (nonatomic) NSInteger                     maxItemCount;
+@property (nonatomic) CGSize                        itemContainerSize;
 
 @property (nonatomic) UIView                        *containerView;
 @property (nonatomic) BOOL                          isEditing;
@@ -51,12 +53,6 @@
         _tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         _tapRec.enabled = NO;
         [_containerView addGestureRecognizer:_tapRec];
-        
-        // 初始样式
-        _paddingInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        _itemSize = CGSizeMake(CGRectGetWidth(self.bounds) - _paddingInsets.left - _paddingInsets.right, 50);
-        _itemHorizontalSpacing = 0;
-        _itemVerticalSpacing = 0;
     }
     return self;
 }
@@ -80,65 +76,79 @@
 #pragma mark - 刷新数据
 - (void)reloadData{
     // clear old
-    M2SimpleGridViewCell *item = nil;
+    UIView *item = nil;
     for (item in _items) {
         [item removeFromSuperview];
     }
     [_items removeAllObjects];
     
-    if (!_dataSource) {
+    if (!_dataSource
+        || ![_dataSource respondsToSelector:@selector(numberOfCellsInGridView:)]
+        || ![_dataSource respondsToSelector:@selector(gridView:cellAtIndex:)]
+        || ![_dataSource respondsToSelector:@selector(addItemViewForGridView:)]) {
         return;
     }
     
-    NSInteger count = 0;
-    if (![_dataSource respondsToSelector:@selector(numberOfCellsInGridView:)]) {
-        return;
-    }
-    count = [_dataSource numberOfCellsInGridView:self];
+    NSInteger count = [_dataSource numberOfCellsInGridView:self];
     if (count <= 0) {
         return;
     }
     
-    CGFloat contentAreaWidth = CGRectGetWidth(self.bounds) - _paddingInsets.left - _paddingInsets.right;
-    CGFloat contentAreaWidthForCalc = contentAreaWidth + _itemHorizontalSpacing;
-    CGFloat itemWidthForCalc = _itemSize.width + _itemHorizontalSpacing;
-    if (itemWidthForCalc <= 0) {
+    _containerView.frame = CGRectMake(_paddingInsets.left, _paddingInsets.top, CGRectGetWidth(self.bounds) - _paddingInsets.left - _paddingInsets.right, CGRectGetHeight(self.bounds) - _paddingInsets.top - _paddingInsets.bottom);
+    if (_itemSize.width <= 0 || _itemSize.height <= 0) {
         return;
     }
-    _itemCountInRow = contentAreaWidthForCalc / itemWidthForCalc;
-    if (_itemCountInRow <= 0){
+    if (_itemCountInRow <= 0 || _rowCount <= 0){
         return;
     }
-    CGFloat contentAreaHeight = CGRectGetHeight(self.bounds) - _paddingInsets.top - _paddingInsets.bottom;
-    CGFloat contentAreaHeightForCalc = contentAreaHeight + _itemVerticalSpacing;
-    CGFloat itemHeightForCalc = _itemSize.height + _itemVerticalSpacing;
-    if (itemHeightForCalc <= 0) {
-        return;
-    }
-    NSInteger rowCount = contentAreaHeightForCalc / itemHeightForCalc;
-    if (rowCount <= 0) {
-        return;
-    }
-    _maxItemCount = _itemCountInRow * rowCount;
     
-    if (![_dataSource respondsToSelector:@selector(gridView:cellAtIndex:)]) {
-        return;
-    }
+    NSAssert((_itemSize.width * _itemCountInRow <= CGRectGetWidth(_containerView.bounds)), @"itemSize与itemCountInRow设置冲突，一行放不下指定个数的item。");
+    NSAssert((_itemSize.height * _rowCount <= CGRectGetHeight(_containerView.bounds)), @"itemSize与rowCount设置冲突，一列放不下指定个数的item。");
+    
+    _itemContainerSize = CGSizeMake(floor(CGRectGetWidth(_containerView.bounds) / _itemCountInRow), floor(CGRectGetHeight(_containerView.bounds) / _rowCount));
+    _maxItemCount = _itemCountInRow * _rowCount;
     
     // build new
-    NSInteger i = 0;
-    for (; i < count; i++) {
+    M2SimpleGridViewItemContainer *itemContainer = nil;
+    CGSize deleteButtonSize = CGSizeMake(15, 15);
+    if ([_dataSource respondsToSelector:@selector(deleteButtonSizeOfItemForGridView:)]) {
+        deleteButtonSize = [_dataSource deleteButtonSizeOfItemForGridView:self];
+    }
+    UIImage *deleteButtonImage = nil;
+    if ([_dataSource respondsToSelector:@selector(deleteButtonImageOfItemForGridView:)]) {
+        deleteButtonImage = [_dataSource deleteButtonImageOfItemForGridView:self];
+    }
+    for (NSInteger i = 0; i < count; i++) {
+        itemContainer = [[M2SimpleGridViewItemContainer alloc] initWithFrame:[self buildItemContainerFrameWithIndex: i]];
+        itemContainer.tag = M2SGV_Tag_TypeContentItem;
+        itemContainer.tapDeleteHandler = [self buildTapDeleteHandler];
+        [_containerView addSubview:itemContainer];
+        [_items addObject:itemContainer];
         item = [_dataSource gridView:self cellAtIndex:i];
-        item.frame = [self buildItemFrameWithIndex:i];
-        [_containerView addSubview:item];
-        [_items addObject:item];
-        item.tapDeleteHandler = [self buildTapDeleteHandler];
+        item.frame = CGRectMake((_itemContainerSize.width - _itemSize.width) / 2,
+                                (_itemContainerSize.height - _itemSize.height) / 2,
+                                _itemSize.width,
+                                _itemSize.height);
+        [itemContainer insertSubview:item atIndex:0];
+        itemContainer.deleteButton.frame = CGRectMake(0, 0, deleteButtonSize.width, deleteButtonSize.height);
+        itemContainer.deleteButton.center = item.frame.origin;
+        if (deleteButtonImage) {
+            [itemContainer.deleteButton setImage:deleteButtonImage forState:UIControlStateNormal];
+        }else{
+            itemContainer.deleteButton.backgroundColor = [UIColor redColor];
+        }
     }
     if (count < _maxItemCount) {
+        itemContainer = [[M2SimpleGridViewItemContainer alloc] initWithFrame:[self buildItemContainerFrameWithIndex: count]];
+        itemContainer.tag = M2SGV_Tag_TypeAddItem;
+        [_containerView addSubview:itemContainer];
+        [_items addObject:itemContainer];
         UIView *addItemView = [self buildAddItemView];
-        addItemView.frame = [self buildItemFrameWithIndex:count];
-        [self.items addObject:addItemView];
-        [self.containerView addSubview:addItemView];
+        addItemView.frame = item.frame = CGRectMake((_itemContainerSize.width - _itemSize.width) / 2,
+                                                    (_itemContainerSize.height - _itemSize.height) / 2,
+                                                    _itemSize.width,
+                                                    _itemSize.height);;
+        [itemContainer insertSubview:addItemView atIndex:0];
     }
 }
 
@@ -158,9 +168,9 @@
         return;
     }
     _isEditing = isEditing;
-    M2SimpleGridViewCell *item = nil;
+    M2SimpleGridViewItemContainer *item = nil;
     for (item in _items) {
-        if ([item isKindOfClass:[M2SimpleGridViewCell class]]) {
+        if (item.tag == M2SGV_Tag_TypeContentItem) {
             [item showDeleteButton:isEditing];
         }else{
             item.hidden = isEditing;
@@ -171,15 +181,15 @@
 }
 
 #pragma mark - 删除元素
-- (TapDeleteHandler)buildTapDeleteHandler{
+- (M2SGVIC_TapDeleteHandler)buildTapDeleteHandler{
     if (!_delegate || ![_delegate respondsToSelector:@selector(gridView:wantsDeleteCellAtIndex:)]) {
         return nil;
     }
     __weak typeof(self) weakSelf = self;
-    TapDeleteHandler tapDeleteHandler = ^(M2SimpleGridViewCell * deleteItem){
+    M2SGVIC_TapDeleteHandler tapDeleteHandler = ^(M2SimpleGridViewItemContainer * deleteItem){
         NSInteger deleteItemIndex = [weakSelf.items indexOfObject:deleteItem];
         for (NSInteger i = [weakSelf.items count] - 1; i > deleteItemIndex; i--) {
-            ((M2SimpleGridViewCell *)[weakSelf.items objectAtIndex:i]).center = ((M2SimpleGridViewCell *)[weakSelf.items objectAtIndex:i - 1]).center;
+            ((UIView *)[weakSelf.items objectAtIndex:i]).center = ((UIView *)[weakSelf.items objectAtIndex:i - 1]).center;
         }
         [deleteItem removeFromSuperview];
         [weakSelf.items removeObject:deleteItem];
@@ -187,10 +197,16 @@
         [weakSelf.delegate gridView:weakSelf wantsDeleteCellAtIndex:deleteItemIndex];
         
         if ([weakSelf.dataSource numberOfCellsInGridView:weakSelf] == weakSelf.maxItemCount - 1) {
-            UIView *addItemView = [weakSelf buildAddItemView];
-            addItemView.frame = [weakSelf buildItemFrameWithIndex:weakSelf.maxItemCount - 1];
-            [weakSelf.items addObject:addItemView];
-            [weakSelf.containerView addSubview:addItemView];
+            M2SimpleGridViewItemContainer *itemContainer = [[M2SimpleGridViewItemContainer alloc] initWithFrame:[self buildItemContainerFrameWithIndex: weakSelf.maxItemCount - 1]];
+            itemContainer.tag = M2SGV_Tag_TypeAddItem;
+            [_containerView addSubview:itemContainer];
+            [_items addObject:itemContainer];
+            UIView *addItemView = [self buildAddItemView];
+            addItemView.frame = CGRectMake((_itemContainerSize.width - _itemSize.width) / 2,
+                                                        (_itemContainerSize.height - _itemSize.height) / 2,
+                                                        _itemSize.width,
+                                                        _itemSize.height);;
+            [itemContainer insertSubview:addItemView atIndex:0];
         }
     };
     
@@ -252,12 +268,13 @@
     _destTouchItemCenter = CGPointZero;
     
     CGPoint point = [rec locationInView:rec.view];
-    M2SimpleGridViewCell *item = nil;
+    UIView *item = nil;
     BOOL isTouchOnItem = NO;
     for (item in _items) {
-        if ([item isKindOfClass:[M2SimpleGridViewCell class]] && CGRectContainsPoint(item.frame, point)) {
+        if (item.tag == M2SGV_Tag_TypeContentItem  && CGRectContainsPoint(item.frame, point)) {
             isTouchOnItem = YES;
             _touchedItem = item;
+            [_containerView bringSubviewToFront:_touchedItem];
             _srcTouchPoint = point;
             _srcTouchItemCenter = item.center;
             _destTouchItemCenter = item.center;
@@ -278,12 +295,12 @@
     CGPoint curCenter = CGPointMake(_srcTouchItemCenter.x + offsetX, _srcTouchItemCenter.y + offsetY);
     _touchedItem.center = curCenter;
     
-    M2SimpleGridViewCell *item = nil;
+    UIView *item = nil;
     int curTouchIndex = -1;
     int targetIndex = -1;
     BOOL isAtValidArea = NO;
     for (item in _items) {
-        if (![item isKindOfClass:[M2SimpleGridViewCell class]]) {
+        if (item.tag == M2SGV_Tag_TypeAddItem) {
             continue;
         }
         if (item != _touchedItem && CGRectContainsPoint(item.frame, curCenter)) {
@@ -294,13 +311,12 @@
         }
     }
     if (!isAtValidArea) {
-        NSLog(@"进入非法区  @@%s", __func__);
         if ([_dataSource numberOfCellsInGridView:self] == _maxItemCount) {
             return;
         }
         CGRect frame = CGRectZero;
         for (NSInteger i = [_items count] - 1; i < _maxItemCount; i++) {
-            frame = [self buildItemFrameWithIndex:i];
+            frame = [self buildItemContainerFrameWithIndex:i];
             if (CGRectContainsPoint(frame, curCenter)) {
                 curTouchIndex = [_items indexOfObject:_touchedItem];
                 targetIndex = [_items count] - 2;
@@ -313,21 +329,20 @@
         return;
     }
     
-    CGPoint nextDestTouchItemCenter =  ((M2SimpleGridViewCell *)[_items objectAtIndex:targetIndex]).center;
+    CGPoint nextDestTouchItemCenter =  ((UIView *)[_items objectAtIndex:targetIndex]).center;
     
     [UIView animateWithDuration:0.25
                      animations:^{
                          if (curTouchIndex > targetIndex) {
                              for (int i = targetIndex; i <= curTouchIndex - 2; i++) {
-                                 ((M2SimpleGridViewCell *)[_items objectAtIndex:i]).center = ((M2SimpleGridViewCell *)[_items objectAtIndex:i + 1]).center;
+                                 ((UIView *)[_items objectAtIndex:i]).center = ((UIView *)[_items objectAtIndex:i + 1]).center;
                              }
-                             ((M2SimpleGridViewCell *)[_items objectAtIndex:curTouchIndex - 1]).center = _destTouchItemCenter;
+                             ((UIView *)[_items objectAtIndex:curTouchIndex - 1]).center = _destTouchItemCenter;
                          }else{
                              for (int i = targetIndex; i >= curTouchIndex + 2; i--) {
-                                 ((M2SimpleGridViewCell *)[_items objectAtIndex:i]).center = ((M2SimpleGridViewCell *)[_items objectAtIndex:i - 1]).center;
+                                 ((UIView *)[_items objectAtIndex:i]).center = ((UIView *)[_items objectAtIndex:i - 1]).center;
                              }
-                             NSLog(@"curTouchIndex(%d)  @@%s", curTouchIndex, __func__);
-                             ((M2SimpleGridViewCell *)[_items objectAtIndex:curTouchIndex + 1]).center = _destTouchItemCenter;
+                             ((UIView *)[_items objectAtIndex:curTouchIndex + 1]).center = _destTouchItemCenter;
                          }
                          [_items removeObject:_touchedItem];
                          [_items insertObject:_touchedItem atIndex:targetIndex];
@@ -348,25 +363,13 @@
     if (!_isEditing) {
         return;
     }
-    CGPoint point = [tapRec locationInView:tapRec.view];
-    M2SimpleGridViewCell *item = nil;
-    BOOL isTouchOnItem = NO;
-    for (item in _items) {
-        if ([item isKindOfClass:[M2SimpleGridViewCell class]] && CGRectContainsPoint(item.frame, point)) {
-            isTouchOnItem = YES;
-            break;
-        }
-    }
-    if (!isTouchOnItem) {
-        [self changeEditing:NO];
-    }
+    [self changeEditing:NO];
 }
 
 #pragma mark - tools
 - (UIView *)buildAddItemView{
     UIView *addItemView = [self.dataSource addItemViewForGridView:self];
     NSAssert(addItemView != nil, @"您需要实现M2SimpleGridViewDataSource协议的addItemViewForGridView:方法，且返回值不能为nil。");
-    NSAssert(![addItemView isKindOfClass:[M2SimpleGridViewCell class]], @"M2SimpleGridViewDataSource协议的addItemViewForGridView:方法返回值不能是M2SimpleGridViewCell。");
     addItemView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAddItemRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapAddItem)];
     [addItemView addGestureRecognizer:tapAddItemRec];
@@ -374,11 +377,52 @@
     
     return addItemView;
 }
-- (CGRect)buildItemFrameWithIndex:(NSInteger)index{
-    return CGRectMake(_paddingInsets.left + (_itemSize.width + _itemHorizontalSpacing) * (index % _itemCountInRow),
-                      _paddingInsets.top + (_itemSize.height + _itemVerticalSpacing) * (index / _itemCountInRow),
-                      _itemSize.width,
-                      _itemSize.height);
+
+- (CGRect)buildItemContainerFrameWithIndex:(NSInteger)index{
+    return CGRectMake(_itemContainerSize.width * (index % _itemCountInRow),
+                      _itemContainerSize.height * (index / _itemCountInRow),
+                      _itemContainerSize.width,
+                      _itemContainerSize.height);
+}
+
+@end
+
+@implementation M2SimpleGridViewItemContainer
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = randomColor;
+        // Initialization code
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_deleteButton addTarget:self action:@selector(onTapDeleteButton) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_deleteButton];
+        _deleteButton.hidden = YES;
+    }
+    return self;
+}
+
+#pragma mark -
+- (void)showDeleteButton:(BOOL)toShow{
+    _deleteButton.hidden = !toShow;
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"transform"];
+    shake.duration = 0.13;
+    shake.autoreverses = YES;
+    shake.repeatCount  = MAXFLOAT;
+    shake.removedOnCompletion = NO;//TODO:!
+    shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(-M_PI / 90, 0, 0, 1)];
+    shake.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI / 90, 0, 0, 1)];
+    if (toShow) {
+        [self.layer addAnimation:shake forKey:@"shake"];
+    }else{
+        [self.layer removeAnimationForKey:@"shake"];
+    }
+}
+
+- (void)onTapDeleteButton{
+    if (_tapDeleteHandler) {
+        _tapDeleteHandler(self);
+    }
 }
 
 @end

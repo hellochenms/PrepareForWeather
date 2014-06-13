@@ -26,7 +26,7 @@
 		99D24FCB19470C7B00A3B2BE /* ManageCityGMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D24FCA19470C7B00A3B2BE /* ManageCityGMViewController.m */; };
 		99D24FCE19470D9500A3B2BE /* CityGMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D24FCD19470D9500A3B2BE /* CityGMCell.m */; };
 		99D60643194AE12500F8811A /* M2SimpleGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D60642194AE12500F8811A /* M2SimpleGridView.m */; };
-		99D60646194AE13B00F8811A /* M2SimpleGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D60645194AE13B00F8811A /* M2SimpleGridViewCell.m */; };
+		99D6064A194B04AD00F8811A /* m2_57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D60649194B04AD00F8811A /* m2_57@2x.png */; };
 		99D665E01941B05C00FE3B83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665DF1941B05C00FE3B83 /* Foundation.framework */; };
 		99D665E21941B05C00FE3B83 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E11941B05C00FE3B83 /* CoreGraphics.framework */; };
 		99D665E41941B05C00FE3B83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D665E31941B05C00FE3B83 /* UIKit.framework */; };
@@ -101,8 +101,7 @@
 		99D24FCD19470D9500A3B2BE /* CityGMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityGMCell.m; sourceTree = "<group>"; };
 		99D60641194AE12500F8811A /* M2SimpleGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2SimpleGridView.h; sourceTree = "<group>"; };
 		99D60642194AE12500F8811A /* M2SimpleGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SimpleGridView.m; sourceTree = "<group>"; };
-		99D60644194AE13B00F8811A /* M2SimpleGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2SimpleGridViewCell.h; sourceTree = "<group>"; };
-		99D60645194AE13B00F8811A /* M2SimpleGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SimpleGridViewCell.m; sourceTree = "<group>"; };
+		99D60649194B04AD00F8811A /* m2_57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "m2_57@2x.png"; sourceTree = "<group>"; };
 		99D665DC1941B05C00FE3B83 /* PrepareForWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrepareForWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D665DF1941B05C00FE3B83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		99D665E11941B05C00FE3B83 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -194,8 +193,6 @@
 				998927A51949B5C600DFC9BC /* CityItemCell.m */,
 				99D60641194AE12500F8811A /* M2SimpleGridView.h */,
 				99D60642194AE12500F8811A /* M2SimpleGridView.m */,
-				99D60644194AE13B00F8811A /* M2SimpleGridViewCell.h */,
-				99D60645194AE13B00F8811A /* M2SimpleGridViewCell.m */,
 			);
 			name = "管理城市控件";
 			sourceTree = "<group>";
@@ -262,6 +259,22 @@
 			name = "旧的";
 			sourceTree = "<group>";
 		};
+		99D60647194B049100F8811A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				99D60648194B049100F8811A /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		99D60648194B049100F8811A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				99D60649194B04AD00F8811A /* m2_57@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		99D665D31941B05C00FE3B83 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +319,7 @@
 				99D24FC819470C5E00A3B2BE /* 管理城市GM版_已废弃 */,
 				99D24F8A19470B5000A3B2BE /* 3party */,
 				99D665F11941B05D00FE3B83 /* Images.xcassets */,
+				99D60647194B049100F8811A /* Resources */,
 				99D665E61941B05C00FE3B83 /* Supporting Files */,
 			);
 			path = PrepareForWeather;
@@ -458,6 +472,7 @@
 			files = (
 				99D665EA1941B05C00FE3B83 /* InfoPlist.strings in Resources */,
 				99D665F21941B05D00FE3B83 /* Images.xcassets in Resources */,
+				99D6064A194B04AD00F8811A /* m2_57@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +510,6 @@
 				998927A31949B18000DFC9BC /* ManageCityComponentViewController.m in Sources */,
 				99D666271941C09600FE3B83 /* MainView.m in Sources */,
 				99D6662E1941CDC100FE3B83 /* WeatherView.m in Sources */,
-				99D60646194AE13B00F8811A /* M2SimpleGridViewCell.m in Sources */,
 				99D24F661946FDDE00A3B2BE /* CityItem.m in Sources */,
 				99D24FC119470BE400A3B2BE /* GMGridViewLayoutStrategies.m in Sources */,
 				99D24FC619470C1500A3B2BE /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,

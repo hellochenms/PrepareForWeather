@@ -22,7 +22,7 @@
         self.backgroundColor = [UIColor blueColor];
         
         _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
-        [self.contentView addSubview:_label];
+        [self addSubview:_label];
     }
     return self;
 }

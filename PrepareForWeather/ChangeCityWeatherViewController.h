@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangeCitiesViewController : UIViewController
+@interface ChangeCityWeatherViewController : UIViewController
 
 @end

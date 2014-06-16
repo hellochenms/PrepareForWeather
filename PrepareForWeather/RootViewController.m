@@ -22,7 +22,8 @@
         // Custom initialization
         _datas  = @[
                     @[@"界面组织", @"WeatherRootViewController"],
-                    @[@"切换城市", @"ChangeCitiesViewController"],
+                    @[@"切换城市天气", @"ChangeCitiesViewController"],
+                    @[@"切换城市天气控件", @"ChangeCityWeatherComponentViewController"],
                     @[@"管理城市", @"ManageCityViewController"],
                     @[@"管理城市控件", @"ManageCityComponentViewController"],
                     ];

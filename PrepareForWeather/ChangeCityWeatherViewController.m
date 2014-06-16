@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 Chen Meisong. All rights reserved.
 //
 
-#import "ChangeCitiesViewController.h"
+#import "ChangeCityWeatherViewController.h"
 #import "ChangeCitiesView.h"
 
-@interface ChangeCitiesViewController ()
+@interface ChangeCityWeatherViewController ()
 @property (nonatomic) ChangeCitiesView *mainView;
 @end
 
-@implementation ChangeCitiesViewController
+@implementation ChangeCityWeatherViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

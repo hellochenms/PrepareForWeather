@@ -30,14 +30,14 @@ static CityManager *s_cityManager = nil;
     self = [super init];
     if (self) {
         _cities = [NSMutableArray array];
-        int count = arc4random() % 7;
+        int count = 6;
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i < count; i++) {
             [array addObject:[NSString stringWithFormat:@"%d", i]];
         }
         [_cities addObjectsFromArray:array];
-        NSLog(@"_cities(%@)  @@%s", _cities, __func__);
-        _defalutCityIndex = 0;
+        _defalutCityIndex = arc4random() % count;
+        NSLog(@"_cities(%@) _defalutCityIndex(%d) @@%s", _cities, _defalutCityIndex, __func__);
     }
     
     return self;

@@ -19,6 +19,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.backgroundColor = randomColor;
+        
         _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
         [self addSubview:_label];
     }

@@ -42,8 +42,8 @@
 }
 
 #pragma mark - M2Cell3DataNPagingEnabledViewDataSource
-- (NSString *)cellClassNameForPagingEnabledView:(M2Cell3DataNPagingEnabledView *)view{
-    return NSStringFromClass([CCWCWeatherContentView class]);
+- (UIView *)cellForPagingEnabledView:(M2Cell3DataNPagingEnabledView *)view{
+    return [CCWCWeatherContentView new];
 }
 - (NSInteger)numberOfDatasForPagingEnabledView:(M2Cell3DataNPagingEnabledView *)view{
     return [[CityManager defaultCityManager].cities count];

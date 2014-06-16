@@ -54,7 +54,7 @@
     [_cells removeAllObjects];
     
     if (!_dataSource
-        || ![_dataSource respondsToSelector:@selector(cellClassNameForPagingEnabledView:)]
+        || ![_dataSource respondsToSelector:@selector(cellForPagingEnabledView:)]
         || ![_dataSource respondsToSelector:@selector(numberOfDatasForPagingEnabledView:)]
         || ![_dataSource respondsToSelector:@selector(pagingEnabledView:wantsReloadDataAtIndex:forCell:)]) {
         return;
@@ -69,9 +69,8 @@
     CGFloat cellWidth = CGRectGetWidth(_scrollView.bounds);
     CGFloat cellHeight = CGRectGetHeight(_scrollView.bounds);
     for (NSInteger i = 0; i < _cellCount; i++) {
-        cell = [NSClassFromString([_dataSource cellClassNameForPagingEnabledView:self]) new];
+        cell = [_dataSource cellForPagingEnabledView:self];
         cell.frame = CGRectMake(cellWidth * i, 0, cellWidth, cellHeight);
-        cell.backgroundColor = randomColor;//TODO:!
         [_cells addObject:cell];
         [_scrollView addSubview:cell];
     }

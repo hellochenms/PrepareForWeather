@@ -160,7 +160,7 @@
         [_containerView addSubview:cellContainer];
         [_cells addObject:cellContainer];
         UIView *addCell = [self buildAddCellView];
-        addCell.frame = cell.frame = CGRectMake((_cellContainerSize.width - _cellSize.width) / 2,
+        addCell.frame = CGRectMake((_cellContainerSize.width - _cellSize.width) / 2,
                                                     (_cellContainerSize.height - _cellSize.height) / 2,
                                                     _cellSize.width,
                                                     _cellSize.height);;

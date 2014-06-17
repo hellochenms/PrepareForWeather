@@ -183,7 +183,7 @@
     if (_isEditing == isEditing) {
         return;
     }
-    _isEditing = isEditing;
+    self.isEditing = isEditing;
     M2SimpleGridViewCellContainer *cellContainer = nil;
     for (cellContainer in _cells) {
         if (cellContainer.tag == M2SGV_Tag_TypeContentCell) {

@@ -94,7 +94,9 @@
     SelectCityViewController *subViewController = [SelectCityViewController new];
     __weak typeof(self) weakSelf = self;
     subViewController.tapFinishHandler = ^{
-        [weakSelf.datas addObject:[NSString stringWithFormat:@"new%.0f", [[NSDate date] timeIntervalSince1970]]];
+        long long time = [[NSDate date] timeIntervalSince1970];
+        time = (time % 100000);
+        [weakSelf.datas addObject:[NSString stringWithFormat:@"%lld", time]];
         [weakSelf.cityGridView reloadData];
         NSLog(@"_data(%@)  @@%s", weakSelf.datas, __func__);
     };

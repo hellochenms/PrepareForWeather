@@ -11,8 +11,6 @@
 		9935342A1946B5C8009F7784 /* WeatherExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993534291946B5C8009F7784 /* WeatherExtraView.m */; };
 		9948166C1941FD4500A7F895 /* CityManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948166B1941FD4500A7F895 /* CityManageView.m */; };
 		99592FFB1946B3F000B39EB3 /* WeatherContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99592FFA1946B3F000B39EB3 /* WeatherContentView.m */; };
-		9989279C1949996300DFC9BC /* M2SimpleGridView_A.m in Sources */ = {isa = PBXBuildFile; fileRef = 9989279B1949996300DFC9BC /* M2SimpleGridView_A.m */; };
-		9989279F1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.m in Sources */ = {isa = PBXBuildFile; fileRef = 9989279E1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.m */; };
 		998927A31949B18000DFC9BC /* ManageCityComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998927A21949B18000DFC9BC /* ManageCityComponentViewController.m */; };
 		998927A61949B5C600DFC9BC /* CityItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998927A51949B5C600DFC9BC /* CityItemCell.m */; };
 		99A745F7194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A745F6194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m */; };
@@ -72,10 +70,6 @@
 		9948166B1941FD4500A7F895 /* CityManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityManageView.m; sourceTree = "<group>"; };
 		99592FF91946B3F000B39EB3 /* WeatherContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherContentView.h; sourceTree = "<group>"; };
 		99592FFA1946B3F000B39EB3 /* WeatherContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherContentView.m; sourceTree = "<group>"; };
-		9989279A1949996300DFC9BC /* M2SimpleGridView_A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2SimpleGridView_A.h; sourceTree = "<group>"; };
-		9989279B1949996300DFC9BC /* M2SimpleGridView_A.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SimpleGridView_A.m; sourceTree = "<group>"; };
-		9989279D1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2SimpleGridViewCell_A.h; sourceTree = "<group>"; };
-		9989279E1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SimpleGridViewCell_A.m; sourceTree = "<group>"; };
 		998927A11949B18000DFC9BC /* ManageCityComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageCityComponentViewController.h; sourceTree = "<group>"; };
 		998927A21949B18000DFC9BC /* ManageCityComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageCityComponentViewController.m; sourceTree = "<group>"; };
 		998927A41949B5C600DFC9BC /* CityItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityItemCell.h; sourceTree = "<group>"; };
@@ -195,7 +189,6 @@
 		998927A01949B13C00DFC9BC /* 管理城市控件 */ = {
 			isa = PBXGroup;
 			children = (
-				99D60640194AE10900F8811A /* 旧的 */,
 				998927A11949B18000DFC9BC /* ManageCityComponentViewController.h */,
 				998927A21949B18000DFC9BC /* ManageCityComponentViewController.m */,
 				998927A41949B5C600DFC9BC /* CityItemCell.h */,
@@ -268,17 +261,6 @@
 				99D24FCD19470D9500A3B2BE /* CityGMCell.m */,
 			);
 			name = "管理城市GM版_已废弃";
-			sourceTree = "<group>";
-		};
-		99D60640194AE10900F8811A /* 旧的 */ = {
-			isa = PBXGroup;
-			children = (
-				9989279A1949996300DFC9BC /* M2SimpleGridView_A.h */,
-				9989279B1949996300DFC9BC /* M2SimpleGridView_A.m */,
-				9989279D1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.h */,
-				9989279E1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.m */,
-			);
-			name = "旧的";
 			sourceTree = "<group>";
 		};
 		99D60647194B049100F8811A /* Resources */ = {
@@ -524,7 +506,6 @@
 				99D666141941B1EF00FE3B83 /* ChangeCityWeatherViewController.m in Sources */,
 				99D60643194AE12500F8811A /* M2SimpleGridView.m in Sources */,
 				99592FFB1946B3F000B39EB3 /* WeatherContentView.m in Sources */,
-				9989279C1949996300DFC9BC /* M2SimpleGridView_A.m in Sources */,
 				99A745F7194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m in Sources */,
 				99D24F631946FDB200A3B2BE /* ManageCityViewController.m in Sources */,
 				99D24FBF19470BE400A3B2BE /* GMGridView.m in Sources */,
@@ -539,7 +520,6 @@
 				99D24F661946FDDE00A3B2BE /* CityItem.m in Sources */,
 				99D24FC119470BE400A3B2BE /* GMGridViewLayoutStrategies.m in Sources */,
 				99D24FC619470C1500A3B2BE /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
-				9989279F1949AF0A00DFC9BC /* M2SimpleGridViewCell_A.m in Sources */,
 				99D6661E1941C03800FE3B83 /* WeatherRootViewController.m in Sources */,
 				99D666101941B0DC00FE3B83 /* RootViewController.m in Sources */,
 				99D666171941B4AD00FE3B83 /* CityManager.m in Sources */,

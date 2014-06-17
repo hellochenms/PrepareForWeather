@@ -158,9 +158,9 @@
         [_cells addObject:cellContainer];
         UIView *addCell = [self buildAddCellView];
         addCell.frame = CGRectMake((_cellContainerSize.width - _cellSize.width) / 2,
-                                                    (_cellContainerSize.height - _cellSize.height) / 2,
-                                                    _cellSize.width,
-                                                    _cellSize.height);;
+                                   (_cellContainerSize.height - _cellSize.height) / 2,
+                                   _cellSize.width,
+                                   _cellSize.height);;
         [cellContainer insertSubview:addCell atIndex:0];
     }
 }
@@ -201,27 +201,31 @@
     __weak typeof(self) weakSelf = self;
     M2SGVIC_TapDeleteHandler tapDeleteHandler = ^(M2SimpleGridViewCellContainer * deleteCell){
         NSInteger deleteCellIndex = [weakSelf.cells indexOfObject:deleteCell];
-        for (NSInteger i = [weakSelf.cells count] - 1; i > deleteCellIndex; i--) {
-            ((UIView *)[weakSelf.cells objectAtIndex:i]).center = ((UIView *)[weakSelf.cells objectAtIndex:i - 1]).center;
-        }
-        [deleteCell removeFromSuperview];
-        [weakSelf.cells removeObject:deleteCell];
-        
-        [weakSelf.delegate gridView:weakSelf wantsDeleteCellAtIndex:deleteCellIndex];
-        
-        if ([weakSelf.dataSource numberOfCellsInGridView:weakSelf] == weakSelf.maxCellCount - 1) {
-            M2SimpleGridViewCellContainer *cellContainer = [[M2SimpleGridViewCellContainer alloc] initWithFrame:[self buildCellContainerFrameWithIndex: weakSelf.maxCellCount - 1]];
-            cellContainer.tag = M2SGV_Tag_TypeAddCell;
-            cellContainer.hidden = _isEditing;
-            [_containerView addSubview:cellContainer];
-            [_cells addObject:cellContainer];
-            UIView *addCellView = [self buildAddCellView];
-            addCellView.frame = CGRectMake((_cellContainerSize.width - _cellSize.width) / 2,
-                                                        (_cellContainerSize.height - _cellSize.height) / 2,
-                                                        _cellSize.width,
-                                                        _cellSize.height);;
-            [cellContainer insertSubview:addCellView atIndex:0];
-        }
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             for (NSInteger i = [weakSelf.cells count] - 1; i > deleteCellIndex; i--) {
+                                 ((UIView *)[weakSelf.cells objectAtIndex:i]).center = ((UIView *)[weakSelf.cells objectAtIndex:i - 1]).center;
+                             }
+                             [deleteCell removeFromSuperview];
+                             
+                             [weakSelf.cells removeObject:deleteCell];
+                             
+                             [weakSelf.delegate gridView:weakSelf wantsDeleteCellAtIndex:deleteCellIndex];
+                             
+                             if ([weakSelf.dataSource numberOfCellsInGridView:weakSelf] == weakSelf.maxCellCount - 1) {
+                                 M2SimpleGridViewCellContainer *cellContainer = [[M2SimpleGridViewCellContainer alloc] initWithFrame:[self buildCellContainerFrameWithIndex: weakSelf.maxCellCount - 1]];
+                                 cellContainer.tag = M2SGV_Tag_TypeAddCell;
+                                 cellContainer.hidden = _isEditing;
+                                 [_containerView addSubview:cellContainer];
+                                 [_cells addObject:cellContainer];
+                                 UIView *addCellView = [self buildAddCellView];
+                                 addCellView.frame = CGRectMake((_cellContainerSize.width - _cellSize.width) / 2,
+                                                                (_cellContainerSize.height - _cellSize.height) / 2,
+                                                                _cellSize.width,
+                                                                _cellSize.height);;
+                                 [cellContainer insertSubview:addCellView atIndex:0];
+                             }
+                         }];
     };
     
     return tapDeleteHandler;

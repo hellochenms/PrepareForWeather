@@ -408,7 +408,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = randomColor;
         // Initialization code
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_deleteButton addTarget:self action:@selector(onTapDeleteButton) forControlEvents:UIControlEventTouchUpInside];

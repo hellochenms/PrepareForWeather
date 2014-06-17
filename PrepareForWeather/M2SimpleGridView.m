@@ -98,11 +98,6 @@
         return;
     }
     
-    NSInteger count = [_dataSource numberOfCellsInGridView:self];
-    if (count <= 0) {
-        return;
-    }
-    
     if ([_dataSource respondsToSelector:@selector(paddingInsetsForGridView:)]) {
         _paddingInsets = [_dataSource paddingInsetsForGridView:self];
     }
@@ -133,6 +128,8 @@
     if ([_dataSource respondsToSelector:@selector(imageOfDeleteCellForGridView:)]) {
         deleteButtonImage = [_dataSource imageOfDeleteCellForGridView:self];
     }
+    
+    NSInteger count = [_dataSource numberOfCellsInGridView:self];
     for (NSInteger i = 0; i < count; i++) {
         cellContainer = [[M2SimpleGridViewCellContainer alloc] initWithFrame:[self buildCellContainerFrameWithIndex: i]];
         cellContainer.tag = M2SGV_Tag_TypeContentCell;

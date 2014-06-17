@@ -86,7 +86,7 @@
         [_scrollView setContentOffset:CGPointZero];
     }else if (_curDataIndex == _dataCount - 1){
         float countDelta = _dataCount - _cellCount;
-        for (NSInteger i = _cellCount - 1; i > 0; i--) {
+        for (NSInteger i = _cellCount - 1; i >= 0; i--) {
             cell = [_cells objectAtIndex:i];
             [_dataSource pagingEnabledView:self wantsReloadDataAtIndex:i + countDelta forCell:cell];
         }

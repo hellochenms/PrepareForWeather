@@ -144,7 +144,7 @@
 #pragma mark - 添加元素
 - (void)onTapAddItem{
     if (_delegate && [_delegate respondsToSelector:@selector(wantsAddNewItemByGridView:)]) {
-        [_delegate wantsAddNewItemByGridView:self];
+        [_delegate wantsAddNewCellByGridView:self];
     }
 }
 
@@ -363,7 +363,7 @@
 
 #pragma mark - tools
 - (UIView *)buildAddItemView{
-    UIView *addItemView = [self.dataSource addItemViewForGridView:self];
+    UIView *addItemView = [self.dataSource addCellForGridView:self];
     NSAssert(addItemView != nil, @"您需要实现M2SimpleGridViewDataSource协议的addItemViewForGridView:方法，且返回值不能为nil。");
     NSAssert(![addItemView isKindOfClass:[M2SimpleGridViewCell_A class]], @"M2SimpleGridViewDataSource协议的addItemViewForGridView:方法返回值不能是M2SimpleGridViewCell。");
     addItemView.userInteractionEnabled = YES;

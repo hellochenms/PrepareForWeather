@@ -29,11 +29,11 @@
 @required
 - (NSInteger)numberOfCellsInGridView:(M2SimpleGridView_A *)gridView;
 - (M2SimpleGridViewCell_A *)gridView:(M2SimpleGridView_A *)gridView cellAtIndex:(NSInteger)index;
-- (UIView *)addItemViewForGridView:(M2SimpleGridView_A *)gridView;
+- (UIView *)addCellForGridView:(M2SimpleGridView_A *)gridView;
 @end
 
 @protocol M2SimpleGridViewDelegate <NSObject>
-- (void)wantsAddNewItemByGridView:(M2SimpleGridView_A *)gridView;
+- (void)wantsAddNewCellByGridView:(M2SimpleGridView_A *)gridView;
 - (void)gridView:(M2SimpleGridView_A *)gridView wantsDeleteCellAtIndex:(NSInteger)index;
 - (void)gridView:(M2SimpleGridView_A *)gridView wantsMoveCellFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 @end

@@ -44,10 +44,6 @@
     _cityGridView.backgroundColor = [UIColor grayColor];
     _cityGridView.dataSource = self;
     _cityGridView.delegate = self;
-    _cityGridView.paddingInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    _cityGridView.itemSize = CGSizeMake(70, 70);
-    _cityGridView.itemCountInRow = 3;
-    _cityGridView.rowCount = 3;
     [self.view addSubview:_cityGridView];
     
     _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,6 +55,9 @@
 }
 
 #pragma mark - M2SimpleGridViewDataSource
+- (UIEdgeInsets)paddingInsetsForGridView:(M2SimpleGridView *)gridView{
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
 - (NSInteger)numberOfCellsInGridView:(M2SimpleGridView *)gridView{
     return [_datas count];
 }
@@ -68,20 +67,30 @@
     
     return cell;
 }
-- (UIView *)addItemViewForGridView:(M2SimpleGridView *)gridView{
+- (CGSize)sizeOfCellForGridView:(M2SimpleGridView *)gridView{
+    return CGSizeMake(70, 70);
+}
+- (NSInteger)cellCountInRowForGridView:(M2SimpleGridView *)gridView{
+    return 3;
+}
+- (NSInteger)rowCountForGridView:(M2SimpleGridView *)gridView{
+    return 3;
+}
+- (UIView *)addCellForGridView:(M2SimpleGridView *)gridView{
     UILabel *label = [UILabel new];
     label.textColor = [UIColor redColor];
     label.text = @"Add";
     return label;
 }
-- (CGSize)deleteButtonSizeOfItemForGridView:(M2SimpleGridView *)gridView{
+- (CGSize)sizeOfDeleteCellForGridView:(M2SimpleGridView *)gridView{
     return CGSizeMake(20, 20);
 }
-- (UIImage *)deleteButtonImageOfItemForGridView:(M2SimpleGridView *)gridView{
+- (UIImage *)imageOfDeleteCellForGridView:(M2SimpleGridView *)gridView{
     return [UIImage imageNamed:@"m2_57"];
 }
+
 #pragma mark - M2SimpleGridViewDelegate
-- (void)wantsAddNewItemByGridView:(M2SimpleGridView *)gridView{
+- (void)wantsAddNewCellByGridView:(M2SimpleGridView *)gridView{
     SelectCityViewController *subViewController = [SelectCityViewController new];
     __weak typeof(self) weakSelf = self;
     subViewController.tapFinishHandler = ^{

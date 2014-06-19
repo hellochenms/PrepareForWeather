@@ -54,6 +54,10 @@
 - (void)pagingEnabledView:(M2Cell3DataNPagingEnabledView *)view wantsReloadDataAtIndex:(NSInteger)index forCell:(UIView *)cell{
     [((CCWCWeatherContentView *)cell) reloadData:[[CityManager defaultCityManager].cities objectAtIndex:index]];
 }
+- (void)pagingEnabledView:(M2Cell3DataNPagingEnabledView *)view changeCurrentDataIndex:(NSInteger)index{
+    [CityManager defaultCityManager].defalutCityIndex = index;
+//    NSLog(@"cityManager(%@)  %s", [CityManager defaultCityManager], __func__);
+}
 
 - (void)didReceiveMemoryWarning
 {

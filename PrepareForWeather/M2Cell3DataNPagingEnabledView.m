@@ -56,7 +56,8 @@
     if (!_dataSource
         || ![_dataSource respondsToSelector:@selector(cellForPagingEnabledView:)]
         || ![_dataSource respondsToSelector:@selector(numberOfDatasForPagingEnabledView:)]
-        || ![_dataSource respondsToSelector:@selector(pagingEnabledView:wantsReloadDataAtIndex:forCell:)]) {
+        || ![_dataSource respondsToSelector:@selector(pagingEnabledView:wantsReloadDataAtIndex:forCell:)]
+        || ![_dataSource respondsToSelector:@selector(pagingEnabledView:changeCurrentDataIndex:)]) {
         return;
     }
     
@@ -103,11 +104,7 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (_dataCount <= M2C3DNPEV_MaxItemCount) {
-        return;
-    }
     if (_isCodeMakeScroll) {
         _isCodeMakeScroll = NO;
         return;
@@ -115,21 +112,23 @@
     float itemWidth = CGRectGetWidth(scrollView.bounds);
     int nextItemIndex = (scrollView.contentOffset.x + itemWidth / 2) / itemWidth;
     if (nextItemIndex != _curCellIndex) {
-//        NSLog(@"itemIndex change(%d->%d)  @@%s", _curCellIndex, nextItemIndex, __func__);
+        //        NSLog(@"itemIndex change(%d->%d)  @@%s", _curCellIndex, nextItemIndex, __func__);
         if (nextItemIndex > _curCellIndex) {
             _curDataIndex++;
         }else if (nextItemIndex < _curCellIndex){
             _curDataIndex--;
         }
+        [_dataSource pagingEnabledView:self changeCurrentDataIndex:_curDataIndex];
+        
         // 在中间
         if (nextItemIndex == 1) {
-//            NSLog(@"在中间，不需要调整  @@%s", __func__);
+            //            NSLog(@"在中间，不需要调整  @@%s", __func__);
             _curCellIndex = nextItemIndex;
         }
         // 在右边
         else if (nextItemIndex == 2){
             if (_curDataIndex + 1 >= _dataCount) {
-//                NSLog(@"到达数据右边界， 不需要调整  @@%s", __func__);
+                //                NSLog(@"到达数据右边界， 不需要调整  @@%s", __func__);
                 _curCellIndex = nextItemIndex;
             }else{
                 CGRect lastItemFrame = ((UIView *)[_cells lastObject]).frame;
@@ -149,7 +148,7 @@
         // 在左边
         else if (nextItemIndex == 0){
             if (_curDataIndex - 1 < 0) {
-//                NSLog(@"到达数据左边界， 不需要调整  @@%s", __func__);
+                //                NSLog(@"到达数据左边界， 不需要调整  @@%s", __func__);
                 _curCellIndex = nextItemIndex;
             }else{
                 CGRect firstItemFrame = ((UIView *)[_cells firstObject]).frame;

@@ -48,4 +48,8 @@ static CityManager *s_cityManager = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kCMCitiesDidUpdate object:nil];
 }
 
+- (NSString *)description{
+    return [NSString stringWithFormat:@"_cities(%@) _defalutCityIndex(%d)", _cities, _defalutCityIndex];
+}
+
 @end

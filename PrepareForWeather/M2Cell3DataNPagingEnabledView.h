@@ -24,4 +24,5 @@
 - (NSInteger)numberOfDatasForPagingEnabledView:(M2Cell3DataNPagingEnabledView *)view;
 - (NSInteger)curDataIndexForPagingEnabledView:(M2Cell3DataNPagingEnabledView *)view;
 - (void)pagingEnabledView:(M2Cell3DataNPagingEnabledView *)view wantsReloadDataAtIndex:(NSInteger)index forCell:(UIView *)cell;
+- (void)pagingEnabledView:(M2Cell3DataNPagingEnabledView *)view changeCurrentDataIndex:(NSInteger)index;
 @end

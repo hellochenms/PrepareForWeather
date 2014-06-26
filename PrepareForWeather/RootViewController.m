@@ -26,6 +26,7 @@
                     @[@"切换城市天气控件", @"ChangeCityWeatherComponentViewController"],
                     @[@"管理城市", @"ManageCityViewController"],
                     @[@"管理城市控件", @"ManageCityComponentViewController"],
+                    @[@"趋势图调研", @"TrendsThinkViewController"],
                     ];
     }
     return self;

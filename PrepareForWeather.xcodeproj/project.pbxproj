@@ -15,6 +15,7 @@
 		99704EFC195BC79100861CFA /* TrendsThinkLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99704EFB195BC79100861CFA /* TrendsThinkLayerView.m */; };
 		99704EFE195BC84600861CFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99704EFD195BC84600861CFA /* QuartzCore.framework */; };
 		99704F01195BCDE100861CFA /* TrendsThinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99704F00195BCDE100861CFA /* TrendsThinkView.m */; };
+		99704F04195BD1AF00861CFA /* TrendsThinkGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99704F03195BD1AF00861CFA /* TrendsThinkGroupView.m */; };
 		998927A31949B18000DFC9BC /* ManageCityComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998927A21949B18000DFC9BC /* ManageCityComponentViewController.m */; };
 		998927A61949B5C600DFC9BC /* CityItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998927A51949B5C600DFC9BC /* CityItemCell.m */; };
 		99A745F7194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A745F6194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m */; };
@@ -81,6 +82,8 @@
 		99704EFD195BC84600861CFA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		99704EFF195BCDE100861CFA /* TrendsThinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendsThinkView.h; sourceTree = "<group>"; };
 		99704F00195BCDE100861CFA /* TrendsThinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendsThinkView.m; sourceTree = "<group>"; };
+		99704F02195BD1AF00861CFA /* TrendsThinkGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendsThinkGroupView.h; sourceTree = "<group>"; };
+		99704F03195BD1AF00861CFA /* TrendsThinkGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendsThinkGroupView.m; sourceTree = "<group>"; };
 		998927A11949B18000DFC9BC /* ManageCityComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageCityComponentViewController.h; sourceTree = "<group>"; };
 		998927A21949B18000DFC9BC /* ManageCityComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageCityComponentViewController.m; sourceTree = "<group>"; };
 		998927A41949B5C600DFC9BC /* CityItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityItemCell.h; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				99704F00195BCDE100861CFA /* TrendsThinkView.m */,
 				99704EFA195BC79100861CFA /* TrendsThinkLayerView.h */,
 				99704EFB195BC79100861CFA /* TrendsThinkLayerView.m */,
+				99704F02195BD1AF00861CFA /* TrendsThinkGroupView.h */,
+				99704F03195BD1AF00861CFA /* TrendsThinkGroupView.m */,
 			);
 			name = "趋势图调研";
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				99D666271941C09600FE3B83 /* MainView.m in Sources */,
 				99D6662E1941CDC100FE3B83 /* WeatherView.m in Sources */,
 				99D24F661946FDDE00A3B2BE /* CityItem.m in Sources */,
+				99704F04195BD1AF00861CFA /* TrendsThinkGroupView.m in Sources */,
 				99D24FC119470BE400A3B2BE /* GMGridViewLayoutStrategies.m in Sources */,
 				99D24FC619470C1500A3B2BE /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				99D6661E1941C03800FE3B83 /* WeatherRootViewController.m in Sources */,

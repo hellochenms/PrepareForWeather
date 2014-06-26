@@ -71,7 +71,7 @@ typedef void (^DrawLayerHandler)(CGContextRef);
     NSLog(@"  %s", __func__);
     CGContextSaveGState(ctx);
     CGContextAddRect(ctx, _backgroundLayer.bounds);
-    CGContextSetFillColorWithColor(ctx, [UIColor blueColor].CGColor);
+    CGContextSetFillColorWithColor(ctx, [UIColor greenColor].CGColor);
     CGContextFillPath(ctx);
     CGContextRestoreGState(ctx);
 }

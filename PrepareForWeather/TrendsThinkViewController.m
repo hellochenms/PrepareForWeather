@@ -9,10 +9,12 @@
 #import "TrendsThinkViewController.h"
 #import "TrendsThinkView.h"
 #import "TrendsThinkLayerView.h"
+#import "TrendsThinkGroupView.h"
 
 @interface TrendsThinkViewController ()
 @property (nonatomic) TrendsThinkView       *trendsView;
 @property (nonatomic) TrendsThinkLayerView  *trendsLayerView;
+@property (nonatomic) TrendsThinkGroupView  *trendsGroupView;
 @end
 
 @implementation TrendsThinkViewController
@@ -35,11 +37,14 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    _trendsView = [[TrendsThinkView alloc] initWithFrame:CGRectMake(10, 10, 300, 200)];
+    _trendsView = [[TrendsThinkView alloc] initWithFrame:CGRectMake(10, 10, 300, 150)];
     [self.view addSubview:_trendsView];
     
-    _trendsLayerView = [[TrendsThinkLayerView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_trendsView.frame) + 10, 300, 200)];
+    _trendsLayerView = [[TrendsThinkLayerView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_trendsView.frame) + 10, 300, 150)];
     [self.view addSubview:_trendsLayerView];
+    
+    _trendsGroupView = [[TrendsThinkGroupView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_trendsLayerView.frame) + 10, 300, 150)];
+    [self.view addSubview:_trendsGroupView];    
 }
 
 - (void)didReceiveMemoryWarning

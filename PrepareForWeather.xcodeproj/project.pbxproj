@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		990CDC82197E4BDE0070E224 /* M2SimpleNSelect1View.m in Sources */ = {isa = PBXBuildFile; fileRef = 990CDC81197E4BDE0070E224 /* M2SimpleNSelect1View.m */; };
+		990CDC85197E4C060070E224 /* NSelect1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990CDC84197E4C060070E224 /* NSelect1ViewController.m */; };
 		993534271946B5B9009F7784 /* WeatherBasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993534261946B5B9009F7784 /* WeatherBasicView.m */; };
 		9935342A1946B5C8009F7784 /* WeatherExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993534291946B5C8009F7784 /* WeatherExtraView.m */; };
 		9948166C1941FD4500A7F895 /* CityManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948166B1941FD4500A7F895 /* CityManageView.m */; };
@@ -67,6 +69,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		990CDC80197E4BDE0070E224 /* M2SimpleNSelect1View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2SimpleNSelect1View.h; sourceTree = "<group>"; };
+		990CDC81197E4BDE0070E224 /* M2SimpleNSelect1View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SimpleNSelect1View.m; sourceTree = "<group>"; };
+		990CDC83197E4C060070E224 /* NSelect1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSelect1ViewController.h; sourceTree = "<group>"; };
+		990CDC84197E4C060070E224 /* NSelect1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSelect1ViewController.m; sourceTree = "<group>"; };
 		993534251946B5B9009F7784 /* WeatherBasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherBasicView.h; sourceTree = "<group>"; };
 		993534261946B5B9009F7784 /* WeatherBasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherBasicView.m; sourceTree = "<group>"; };
 		993534281946B5C8009F7784 /* WeatherExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherExtraView.h; sourceTree = "<group>"; };
@@ -180,6 +186,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		990CDC7C197E4B790070E224 /* N选1控件 */ = {
+			isa = PBXGroup;
+			children = (
+				990CDC83197E4C060070E224 /* NSelect1ViewController.h */,
+				990CDC84197E4C060070E224 /* NSelect1ViewController.m */,
+				990CDC80197E4BDE0070E224 /* M2SimpleNSelect1View.h */,
+				990CDC81197E4BDE0070E224 /* M2SimpleNSelect1View.m */,
+			);
+			name = "N选1控件";
+			sourceTree = "<group>";
+		};
 		993534241946B58C009F7784 /* WeatherContentViewSub */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +371,7 @@
 				998927A01949B13C00DFC9BC /* 管理城市控件 */,
 				99D24FC819470C5E00A3B2BE /* 管理城市GM版_已废弃 */,
 				99704EF6195BC73500861CFA /* 趋势图调研 */,
+				990CDC7C197E4B790070E224 /* N选1控件 */,
 				99D24F8A19470B5000A3B2BE /* 3party */,
 				99D665F11941B05D00FE3B83 /* Images.xcassets */,
 				99D60647194B049100F8811A /* Resources */,
@@ -539,11 +557,13 @@
 				99D666141941B1EF00FE3B83 /* ChangeCityWeatherViewController.m in Sources */,
 				99D60643194AE12500F8811A /* M2SimpleGridView.m in Sources */,
 				99704EFC195BC79100861CFA /* TrendsThinkLayerView.m in Sources */,
+				990CDC85197E4C060070E224 /* NSelect1ViewController.m in Sources */,
 				99592FFB1946B3F000B39EB3 /* WeatherContentView.m in Sources */,
 				99A745F7194E9F1300692D0E /* ChangeCityWeatherComponentViewController.m in Sources */,
 				99D24F631946FDB200A3B2BE /* ManageCityViewController.m in Sources */,
 				99D24FBF19470BE400A3B2BE /* GMGridView.m in Sources */,
 				99D665EC1941B05C00FE3B83 /* main.m in Sources */,
+				990CDC82197E4BDE0070E224 /* M2SimpleNSelect1View.m in Sources */,
 				99D6661A1941B51000FE3B83 /* ChangeCitiesView.m in Sources */,
 				99D666241941C08700FE3B83 /* SettingView.m in Sources */,
 				99D24FCB19470C7B00A3B2BE /* ManageCityGMViewController.m in Sources */,

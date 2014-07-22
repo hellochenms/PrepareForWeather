@@ -27,6 +27,7 @@
                     @[@"管理城市", @"ManageCityViewController"],
                     @[@"管理城市控件", @"ManageCityComponentViewController"],
                     @[@"趋势图调研", @"TrendsThinkViewController"],
+                    @[@"N选1控件", @"NSelect1ViewController"]
                     ];
     }
     return self;

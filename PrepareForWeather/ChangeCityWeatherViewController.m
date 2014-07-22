@@ -20,9 +20,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        if (isIOS7) {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-        }
     }
     return self;
 }
@@ -31,7 +28,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = randomColor;//TODO:!
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    if (isIOS7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
     
     _mainView = [[ChangeCitiesView alloc] initWithFrame:CGRectMake(10, 10, 300, 400)];
     [self.view addSubview:_mainView];

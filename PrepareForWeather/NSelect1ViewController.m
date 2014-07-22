@@ -87,6 +87,9 @@
     [_nSelect1View selectIndex:1];
     [_attributedNSelect1View selectIndex:1];
     [_vertivalNSelect1View selectIndex:1];
+
+    //
+    [_nSelect1View setNormalColor:[UIColor blackColor] selectedColor:[UIColor redColor]];
 }
 
 #pragma mark - M2SimpleNSelect1ViewDelegate

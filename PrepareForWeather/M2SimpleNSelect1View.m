@@ -163,6 +163,13 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
     [self selectIndex:index animated:NO];
 }
 
+- (void)setNormalColor:(UIColor *)normalColor
+         selectedColor:(UIColor *)selectedColor{
+    self.normalColor = normalColor;
+    self.selectedColor = selectedColor;
+    [self selectIndex:self.selectedIndex];
+}
+
 #pragma mark - tools
 - (void)selectIndex:(NSInteger)index animated:(BOOL)animated{
     if ([self.cells count] <= 0) {
@@ -193,6 +200,7 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
     }
     cell = [self.cells objectAtIndex:0];
     
+    self.underlineView.backgroundColor = self.selectedColor;
     CGPoint underlineViewCenter = self.underlineView.center;
     if (self.isVerticalLayout) {
         double itemHeight = CGRectGetHeight(cell.bounds);

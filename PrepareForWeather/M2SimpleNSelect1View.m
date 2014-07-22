@@ -115,10 +115,44 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
     return self;
 }
 
+#pragma mark - isVerticalLayout
+- (void)setIsVerticalLayout:(BOOL)isVerticalLayout{
+    if (_isVerticalLayout == isVerticalLayout) {
+        return;
+    }
+    _isVerticalLayout = isVerticalLayout;
+    NSInteger count = [self.cells count];
+    UIButton *cell = nil;
+    double cellWidth = 0;
+    double cellHeight = 0;
+    CGRect underlineViewFrame = self.underlineView.frame;
+    if (_isVerticalLayout) {
+        cellWidth = CGRectGetWidth(self.bounds);
+        cellHeight = ceil(CGRectGetHeight(self.bounds) / count);
+        for (NSInteger i = 0; i < count; i++) {
+            cell = [self.cells objectAtIndex:i];
+            cell.frame = CGRectMake(0, cellHeight * i, cellWidth, cellHeight);
+        }
+        underlineViewFrame.size.width = cellWidth;
+        self.underlineView.frame = underlineViewFrame;
+        self.underlineView.center = CGPointMake(cellWidth / 2, floor(cellHeight * (self.selectedIndex + 1) - CGRectGetHeight(self.underlineView.bounds) / 2));
+    }else{
+        cellWidth = ceil(CGRectGetWidth(self.bounds) / count);
+        cellHeight = CGRectGetHeight(self.bounds);
+        for (NSInteger i = 0; i < count; i++) {
+            cell = [self.cells objectAtIndex:i];
+            cell.frame = CGRectMake(cellWidth * i, 0, cellWidth, cellHeight);
+        }
+        underlineViewFrame.size.width = cellWidth;
+        self.underlineView.frame = underlineViewFrame;
+        self.underlineView.center = CGPointMake(cellWidth * (self.selectedIndex + 0.5), floor(cellHeight - CGRectGetHeight(self.underlineView.bounds) / 2));
+    }
+}
+
 #pragma mark - event
 - (void)onTapCell:(UIButton *)sender{
-    self.selectedIndex = sender.tag - kM2SNS1V_CellTagOffset;
-    [self selectIndex:self.selectedIndex animated:YES];
+    NSInteger index = sender.tag - kM2SNS1V_CellTagOffset;
+    [self selectIndex:index animated:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(nSelect1View:didSelectIndex:)]) {
         [self.delegate nSelect1View:self didSelectIndex:self.selectedIndex];
     }
@@ -134,6 +168,8 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
     if ([self.cells count] <= 0) {
         return;
     }
+    
+    self.selectedIndex = index;
     
     UIButton *cell = nil;
     UIColor *color = nil;
@@ -156,10 +192,16 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
         }
     }
     cell = [self.cells objectAtIndex:0];
-    double itemWidth = CGRectGetWidth(cell.bounds);
+    
     CGPoint underlineViewCenter = self.underlineView.center;
-    underlineViewCenter.x = itemWidth * (0.5 + index);
-    if (!self.underlineViewAnimationDisabled && animated) {
+    if (self.isVerticalLayout) {
+        double itemHeight = CGRectGetHeight(cell.bounds);
+        underlineViewCenter.y = floor(itemHeight * (index + 1) - CGRectGetHeight(self.underlineView.bounds) / 2);
+    } else {
+        double itemWidth = CGRectGetWidth(cell.bounds);
+        underlineViewCenter.x = itemWidth * (0.5 + index);
+    }
+    if (!self.underlineViewAnimationDisabled && !self.isVerticalLayout && animated ) {
         __weak typeof(self) weakSelf = self;
         [UIView animateWithDuration:kM2SNS1V_UnderlineViewAnimationTimeInterval
                          animations:^{

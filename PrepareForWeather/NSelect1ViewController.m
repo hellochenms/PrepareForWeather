@@ -13,6 +13,7 @@
 @property (nonatomic) UIButton *button;
 @property (nonatomic) M2SimpleNSelect1View *nSelect1View;
 @property (nonatomic) M2SimpleNSelect1View *attributedNSelect1View;
+@property (nonatomic) M2SimpleNSelect1View *vertivalNSelect1View;
 @end
 
 @implementation NSelect1ViewController
@@ -49,7 +50,7 @@
                                                      normalFont:[UIFont systemFontOfSize:10]
                                                   selectedColor:[UIColor blueColor]
                                                    selectedFont:[UIFont systemFontOfSize:20]];
-    _nSelect1View.backgroundColor = [UIColor lightGrayColor];
+    _nSelect1View.backgroundColor = [UIColor grayColor];
     _nSelect1View.delegate = self;
     [self.view addSubview:_nSelect1View];
     
@@ -63,16 +64,29 @@
     _attributedNSelect1View = [[M2SimpleNSelect1View alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_nSelect1View.frame) + 10, 300, 60)attributedTitles:@[title0, title1]
                                                               normalColor:[UIColor whiteColor]
                                                             selectedColor:[UIColor blueColor]];
-    _attributedNSelect1View.backgroundColor = [UIColor lightGrayColor];
+    _attributedNSelect1View.backgroundColor = [UIColor grayColor];
     _attributedNSelect1View.underlineViewAnimationDisabled = YES;
     _attributedNSelect1View.delegate = self;
     [self.view addSubview:_attributedNSelect1View];
+    
+    // vertival layout
+    _vertivalNSelect1View = [[M2SimpleNSelect1View alloc] initWithFrame:CGRectMake(50, CGRectGetMaxY(_attributedNSelect1View.frame) + 10, 320 - 50 * 2, 200)
+                                                                 titles:@[@"蓝", @"红", @"橘", @"绿", @"粉"]
+                                                            normalColor:[UIColor whiteColor]
+                                                             normalFont:[UIFont systemFontOfSize:15]
+                                                          selectedColor:[UIColor blueColor]
+                                                           selectedFont:[UIFont systemFontOfSize:25]];
+    _vertivalNSelect1View.isVerticalLayout = YES;
+    _vertivalNSelect1View.backgroundColor = [UIColor grayColor];
+    _vertivalNSelect1View.delegate = self;
+    [self.view addSubview:_vertivalNSelect1View];
 }
 
 #pragma mark - event
 - (void)onTapButton{
     [_nSelect1View selectIndex:1];
     [_attributedNSelect1View selectIndex:1];
+    [_vertivalNSelect1View selectIndex:1];
 }
 
 #pragma mark - M2SimpleNSelect1ViewDelegate

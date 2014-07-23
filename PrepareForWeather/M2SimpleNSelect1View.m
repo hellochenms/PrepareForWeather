@@ -111,7 +111,7 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
         [self addSubview:_underlineView];
         _selectedIndex = 0;
     }
- 
+    
     return self;
 }
 
@@ -209,7 +209,7 @@ isTitleAttributedString:(BOOL)isTitleAttributedString
         double itemWidth = CGRectGetWidth(cell.bounds);
         underlineViewCenter.x = itemWidth * (0.5 + index);
     }
-    if (!self.underlineViewAnimationDisabled && !self.isVerticalLayout && animated ) {
+    if (self.underlineViewAnimationEnabled && !self.isVerticalLayout && animated) {
         __weak typeof(self) weakSelf = self;
         [UIView animateWithDuration:kM2SNS1V_UnderlineViewAnimationTimeInterval
                          animations:^{

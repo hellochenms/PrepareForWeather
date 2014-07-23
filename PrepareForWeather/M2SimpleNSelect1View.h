@@ -14,7 +14,7 @@
 @protocol M2SimpleNSelect1ViewDelegate;
 
 @interface M2SimpleNSelect1View : UIView
-@property (nonatomic) BOOL underlineViewAnimationDisabled;
+@property (nonatomic) BOOL underlineViewAnimationEnabled;
 @property (nonatomic) BOOL isVerticalLayout;
 @property (nonatomic, weak) id<M2SimpleNSelect1ViewDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame

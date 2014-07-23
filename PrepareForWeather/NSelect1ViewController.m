@@ -51,6 +51,7 @@
                                                   selectedColor:[UIColor blueColor]
                                                    selectedFont:[UIFont systemFontOfSize:20]];
     _nSelect1View.backgroundColor = [UIColor grayColor];
+    _nSelect1View.underlineViewAnimationEnabled = YES;
     _nSelect1View.delegate = self;
     [self.view addSubview:_nSelect1View];
     
@@ -65,7 +66,6 @@
                                                               normalColor:[UIColor whiteColor]
                                                             selectedColor:[UIColor blueColor]];
     _attributedNSelect1View.backgroundColor = [UIColor grayColor];
-    _attributedNSelect1View.underlineViewAnimationDisabled = YES;
     _attributedNSelect1View.delegate = self;
     [self.view addSubview:_attributedNSelect1View];
     
